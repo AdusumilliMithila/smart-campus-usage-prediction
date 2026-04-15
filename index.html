@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampOps — Smart Campus Forecasting</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">🏫</div>
+      <div>
+        <div class="logo-text">CampOps</div>
+        <div class="logo-sub">Campus Intelligence</div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="nav-section">Main</div>
+      <div class="nav-item active">Dashboard</div>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="campus-badge">
+        <div class="label">Campus</div>
+        <div class="name">GNITS</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section class="page active">
+      <div class="page-header">
+        <div class="top-row">
+          <div>
+            <div class="breadcrumb">CampOps / Home</div>
+            <h1>Campus Dashboard</h1>
+            <p>Attendance and resource forecast overview</p>
+          </div>
+          <div class="live-badge">
+            <div class="live-dot"></div>
+            Predicted View — 2026
+          </div>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <select id="monthSelect" class="filter-btn"></select>
+
+        <select id="weekSelect" class="filter-btn">
+          <option value="all">All Weeks</option>
+          <option value="1">Week 1</option>
+          <option value="2">Week 2</option>
+          <option value="3">Week 3</option>
+          <option value="4">Week 4</option>
+          <option value="5">Week 5</option>
+        </select>
+
+        <button id="predictBtn" class="filter-btn active">Predict</button>
+      </div>
+
+      <div class="kpi-row">
+        <div class="kpi blue">
+          <div class="label">Attendance</div>
+          <div class="value" id="attendanceValue">--%</div>
+          <div class="change" id="attendanceChange">--</div>
+        </div>
+
+        <div class="kpi green">
+          <div class="label">Lab Usage</div>
+          <div class="value" id="labValue">--%</div>
+          <div class="change" id="labChange">--</div>
+        </div>
+
+        <div class="kpi orange">
+          <div class="label">Library Usage</div>
+          <div class="value" id="libraryValue">--%</div>
+          <div class="change" id="libraryChange">--</div>
+        </div>
+
+        <div class="kpi purple">
+          <div class="label">Internet Usage</div>
+          <div class="value" id="internetValue">--%</div>
+          <div class="change" id="internetChange">--</div>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <div class="chart-title">Attendance & Resource Trend</div>
+          <div class="chart-subtitle">
+            Combined forecast for attendance, lab, library, and internet
+          </div>
+          <div class="chart-wrap tall">
+            <canvas id="trendChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card alerts-col">
+          <div class="chart-title">Alerts & Insights</div>
+          <div class="chart-subtitle">Status for selected month/week</div>
+
+          <div id="alertList"></div>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <div class="chart-title">Resource Breakdown</div>
+          <div class="chart-subtitle">Average percentages in selected range</div>
+          <div class="chart-wrap short">
+            <canvas id="breakdownChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-title">Selected Period Summary</div>
+          <div class="chart-subtitle">Quick comparison view</div>
+          <div class="summary-box" id="summaryBox">
+            Select a month and week, then click Predict.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
