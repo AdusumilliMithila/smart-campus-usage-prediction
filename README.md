@@ -119,7 +119,6 @@ Provided interactive visualization
 
 --Limitations:
 Uses synthetic data
-Not 100% accurate
 ARIMA cannot capture complex nonlinear patterns
 
 --Future Scope:
